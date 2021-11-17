@@ -1,0 +1,77 @@
+﻿@using System.Collections
+@*@model List<SignOuts>*@
+@model List<Staff>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+    <div class="col-md-3">
+        <h3>Staff Status</h3>
+        @foreach (var staff in (IEnumerable) ViewData["StaffStatus"] as List<Staff>)
+        {
+            if (staff.In)
+            {
+                <span style="color: greenyellow; font-weight: bold; font-size: 18px;">@staff.FirstName @staff.LastName</span><br/>
+            }
+            else
+            {
+                <span style="color: red; font-size: 18px;">@staff.FirstName @staff.LastName</span><br/>
+            }
+        }
+    </div>
+    <div class="col-md-9">
+        <h3 class="col-xs-12">Sign Outs Today: </h3>
+
+        @foreach (var item in ViewData["StaffOut"] as List<SignOuts>)
+        {
+            if (item.Day.Date == DateTime.Today.Date)
+            {
+                 <p class="col-md-4">
+                     <b>@item.Staff.FirstName @item.Staff.LastName </b>
+                     <br />
+                     Signed out at:
+                     @item.TimeOut.ToShortTimeString()
+                     <br/>Reason:
+                     @item.Reason.Reason
+                     <br/>Hours in office:
+                     @if (item.HoursIn.Length > 3)
+                     {
+                         @item.HoursIn.Substring(0, 5)
+                     }
+                     else
+                     {
+                         @item.HoursIn.Substring(0, 3)
+                     }
+                 </p>
+             }
+        }
+
+        <h3 class="col-xs-12">Past: </h3>
+
+        @foreach (var item in ViewData["StaffOut"] as List<SignOuts>)
+        {
+            @if (item.Day.Date != DateTime.Today.Date)
+             {
+                 <p class="col-md-4">
+                     <b>@item.Staff.FirstName @item.Staff.LastName </b>
+                     <br />
+                     Signed out at:
+                     @item.TimeOut.ToShortTimeString()
+                     <br/>Reason:
+                     @item.Reason.Reason
+                     <br/>Hours in office:
+                     @if (item.HoursIn.Length > 3)
+                     {
+                         @item.HoursIn.Substring(0, 5)
+                     }
+                     else
+                     {
+                         @item.HoursIn.Substring(0, 3)
+                     }
+                 </p>
+             }
+        }
+    </div>
+
+</div>

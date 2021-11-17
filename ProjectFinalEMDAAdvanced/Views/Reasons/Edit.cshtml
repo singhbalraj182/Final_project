@@ -1,0 +1,39 @@
+﻿@model ProjectFinalEMDAAdvanced.Models.Reasons
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="container">
+    <div class="jumbotron">
+        <h2>Edit Reason</h2>
+        <h4>For Out Of Office</h4>
+        <div>
+            ( <a asp-action="Index"><span class="glyphicon glyphicon-hand-left"></span> Back to List</a> )
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Reason" class="control-label"></label>
+                    <input asp-for="Reason" class="form-control" />
+                    <span asp-validation-for="Reason" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ReasonCount" class="control-label">Reason Count</label>
+                    <input asp-for="ReasonCount" class="form-control" />
+                    <span asp-validation-for="ReasonCount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

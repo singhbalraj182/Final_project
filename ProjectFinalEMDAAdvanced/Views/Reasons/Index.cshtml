@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ProjectFinalEMDAAdvanced.Models.Reasons>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-xs-7">
+                <h2>Reasons for Out Of Office</h2>
+            </div>
+            <div class="col-xs-5 text-right">
+                <a class="btn btn-info" asp-action="Create" style="margin-top: 20px">Create New</a>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Reason
+                    </th>
+                    <th>
+                        Reason Count
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (item.Id != 999)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Reason)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReasonCount)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span> Edit</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                <a asp-action="Delete" asp-route-id="@item.Id" style="color: red">Delete <span class="glyphicon glyphicon-trash"></span></a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

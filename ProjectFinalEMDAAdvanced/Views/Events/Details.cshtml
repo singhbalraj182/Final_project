@@ -1,0 +1,51 @@
+﻿@model ProjectFinalEMDAAdvanced.Models.Events
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="container">
+
+    <div class="jumbotron">
+        <h2>Details</h2>
+    </div>
+    <div>
+        <h4>Events</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Start)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Start)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.End)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.End)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsFullDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IsFullDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Days)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Days)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>

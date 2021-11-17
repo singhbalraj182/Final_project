@@ -1,0 +1,60 @@
+﻿@using System.Collections
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="intro">
+    <div class="overlay">
+        <div class="container">
+            <div class="intro-text">
+                <h1>Welcome to the <span class="brand">EMDA</span></h1>
+                <h2>Staff Management System</h2>
+                <br />
+                <h2><a href="#UpdateStatus"><span class="fa fa-angle-down fa-2x"></span></a></h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="UpdateStatus"></div>
+@await Html.PartialAsync("~/Views/SignOuts/Create.cshtml")
+
+<br />
+
+@await Html.PartialAsync("~/Views/SignOuts/Index.cshtml")
+@section Scripts {
+    <script type="text/javascript">
+        $("#StaffSelect").change(function () {
+            //get the id of the returned entry
+            var ReturnID = $("#StaffSelect  option:selected").val();
+
+            var counter = 0;
+
+            @foreach (SelectListItem staff in (IEnumerable) ViewData["StaffIn"])
+            {
+                int staffID = Convert.ToInt32(staff.Value);
+                if (staff.Text == "True")
+                {
+                    <text>var test = "True";</text>
+                }
+                else {
+                    <text>var test = "False";</text>
+                }
+                <text>
+                    counter++;
+                    for (var i = 0; i < counter; i++) {
+                        if (ReturnID == @staff.Value) {
+                            if (test == "True") {
+                                $("#InToggle").bootstrapToggle("on");
+                                $("#ReasonSelect").show();
+                            }
+                            else {
+                                $("#InToggle").bootstrapToggle("off");
+                                $("#ReasonSelect").hide();
+                            }
+                        }
+                    }
+                </text>
+            }
+
+        });
+    </script>
+}

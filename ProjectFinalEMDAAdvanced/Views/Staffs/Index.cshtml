@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ProjectFinalEMDAAdvanced.Models.Staff>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-xs-7">
+                <h2>All Staff</h2>
+            </div>
+            <div class="col-xs-5 text-right">
+                <a class="btn btn-info" asp-action="Create" style="margin-top: 20px">Create New</a>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.In)
+                </th>
+                <th>
+                    Time In
+                </th>
+                <th>
+                    Time Out
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    @if (item.In == true)
+                    {
+                        <td>
+                            <input type="checkbox" checked disabled />
+                        </td>
+                        <td>
+                            @item.TimeIn.ToShortDateString() <br /> @item.TimeIn.ToShortTimeString()
+                        </td>
+                        <td></td>
+                    }
+                    else if (item.In == false)
+                    {
+                        <td>
+                            <input type="checkbox" disabled />
+                        </td>
+                        <td></td>
+                        <td>
+                            @item.TimeOut.ToShortDateString() <br /> @item.TimeOut.ToShortTimeString()
+                        </td>
+                    }
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span> Edit</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        <a asp-action="Delete" asp-route-id="@item.Id" style="color: red">Delete <span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

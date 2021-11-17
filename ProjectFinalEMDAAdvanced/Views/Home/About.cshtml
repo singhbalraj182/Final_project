@@ -1,0 +1,32 @@
+﻿@model ProjectFinalEMDAAdvanced.Models.Staff
+
+@{
+    ViewData["Title"] = "Sign In / Out";
+}
+
+<div class="container">
+    <h2>
+        Sign In / Out
+    </h2>
+    <br />
+    <div class="row">
+        <form name="staffform" asp-controller="Staffs" asp-action="Edit">
+            <div class="col-md-4 col-xs-6">
+                <select id="StaffSelect" asp-for="Id" asp-items="@((List<SelectListItem>) ViewData["Staff"])" class="form-control" style="width: 100%">
+                    <option value="">Select Staff</option>
+                </select>
+            </div>
+            <div class="col-md-2 col-xs-2 text-center">
+                <input asp-for="In" id="InToggle" type="checkbox" data-toggle="toggle" data-on="In" data-off="Out" data-style="ios" />
+            </div>
+            <div class="col-md-4 col-xs-4">
+                <select id="ReasonSelect" asp-items="@((List<SelectListItem>) ViewData["Reasons"])" class="form-control" style="width: 100%; display:none">
+                    <option value="">Select Reason</option>
+                </select>
+            </div>
+            <div class="col-md-2 col-xs-4">
+                <input type="submit" class="btn btn-success" style="width: 100%" />
+            </div>
+        </form>
+    </div>
+</div>

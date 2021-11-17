@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ProjectFinalEMDAAdvanced.Models.Leave>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-xs-7">
+                <h2>Annual Leave</h2>
+                <a class="label label-danger" asp-controller="Events" asp-action="Index" style="margin-top: 20px">Click Here To Remove An Event From The Calendar</a>
+            </div>
+            <div class="col-xs-5 text-right">
+                <a class="btn btn-info" asp-action="Create" style="margin-top: 20px">Create New Request</a>
+            </div>
+        </div>
+    </div>
+    <div id="script-warning"></div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2" id="calendar"></div>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    Staff Member
+                </th>
+                <th>
+                    Start Date
+                </th>
+                <th>
+                    End Date
+                </th>
+                <th>
+                    # of Days
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Accepted)
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in ViewData["StaffNames"] as List<Leave>)
+            {
+                <tr>
+                    <td>
+                        @item.Staff.FirstName @item.Staff.LastName
+                    </td>
+                    <td>
+                        @item.StartDate.ToShortDateString()
+                    </td>
+                    <td>
+                        @item.EndDate.ToShortDateString()
+                    </td>
+                    <td>
+                        @item.TotalDays
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Accepted)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span> Edit</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        <a asp-action="Delete" asp-route-id="@item.Id" style="color: red">Delete <span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts
+{
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#calendar').fullCalendar({
+            themeSystem: 'bootstrap4',
+            defaultView: 'month',
+            fixedWeekCount: false,
+            events: {
+                url: '/api/EventsAPI',
+                error: function () {
+                    $('#script-warning').show();
+                }
+            }
+        });
+    });
+</script>
+}

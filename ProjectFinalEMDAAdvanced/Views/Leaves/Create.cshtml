@@ -1,0 +1,50 @@
+﻿@model ProjectFinalEMDAAdvanced.Models.Leave
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container">
+    <div class="jumbotron">
+        <h2>Create Leave Request</h2>
+        <h4>For Annual Leave</h4>
+        <div>
+            ( <a asp-action="Index"><span class="glyphicon glyphicon-hand-left"></span> Back to List</a> )
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Staff" class="control-label"></label>
+                    <select id="StaffSelect" asp-for="Staff.Id" asp-items="@((List<SelectListItem>) ViewData["Staff"])" class="form-control" style="width: 100%">
+                        <option value="">Select Staff</option>
+                    </select>
+                    <span asp-validation-for="Staff" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label"></label>
+                    <input asp-for="StartDate" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EndDate" class="control-label"></label>
+                    <input asp-for="EndDate" class="form-control" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TotalDays" class="control-label"></label>
+                    <input asp-for="TotalDays" class="form-control" />
+                    <span asp-validation-for="TotalDays" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
